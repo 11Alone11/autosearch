@@ -175,13 +175,16 @@ Hash работает из коробки и не зависит от настр
 там есть мышь и место, чтобы видеть результат.
 
 **SEO — по возможностям статики.** Приложение — SPA с `HashRouter`: у маршрутов нет
-отдельных HTML-документов, поэтому SSR, sitemap и отдельные canonical-URL здесь ничего
-не дадут. Сделано то, что работает и без сервера: `lang="ru"`, description, robots,
-Open Graph и Twittercard, семантические лендмарки, иерархия заголовков и собственные
-`title`/`description` у каталога, «Моих поисков» и 404 (`src/lib/pageMeta.ts`).
+отдельных HTML-документов, поэтому SSR и sitemap здесь ничего не дадут. Сделано то,
+что работает и без сервера: `lang="ru"`, description, robots, Open Graph и Twittercard,
+семантические лендмарки, иерархия заголовков и собственные `title`/`description`
+у каталога, «Моих поисков» и 404 (`src/lib/pageMeta.ts`). `canonical`, `og:url` и
+`og:image` на сборке становятся абсолютными: адрес берётся из `SITE_URL` или
+вычисляется из `GITHUB_REPOSITORY` (`vite.config.ts`), локально остаётся путь от `base`.
 `sitemap.xml` и `robots.txt` не добавлены: на GitHub Pages проект живёт по пути
 `/<repo>/`, а hash-маршруты не индексируются как отдельные страницы. При переезде на
-свой домен или SSR их стоит добавить вместе с абсолютными `og:url` и canonical.
+свой домен достаточно задать `SITE_URL`; для SSR понадобится отдельная генерация
+документов.
 
 **React Compiler и скролл.** Включён `compiler: true`, поэтому ручной `memo` не нужен.
 Тулбар скрывается классом через ref, без состояния React: прокрутка не вызывает
@@ -215,8 +218,10 @@ E2E и визуальных регрессий в репозитории нет:
 - `.github/workflows/ci.yml` — lint, typecheck, test, build на push и pull request;
 - `.github/workflows/deploy.yml` — те же проверки и публикация `dist` на GitHub Pages.
 
-`base` вычисляется из `GITHUB_REPOSITORY` (или `BASE_PATH`), локально — `/`. После
-первого push включите GitHub Pages в настройках репозитория: источник — GitHub Actions.
+`base` вычисляется из `GITHUB_REPOSITORY` (или `BASE_PATH`), локально — `/`.
+`SITE_URL` (необязательно) задаёт абсолютный адрес для canonical и OG; без него он
+выводится из `GITHUB_REPOSITORY`. После первого push включите GitHub Pages в настройках
+репозитория: источник — GitHub Actions.
 Приложение использует hash-роутер, поэтому дополнительная настройка `404.html` не нужна.
 
 ## Что не успел / что дальше

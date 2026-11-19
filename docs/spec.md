@@ -217,7 +217,9 @@ GitHub Actions:
 и 404; `usePageMeta` применяет их при смене маршрута. Разметка: `header`, `nav` и `main`
 из `AppShell`, `section` для фильтров и результатов, `article` для карточек, `h1`
 у каждой страницы. Иконки и OG-картинка — `public/favicon.svg`, `favicon-32.png`,
-`apple-touch-icon.png`, `og.png`; генерируются `npm run icons`.
+`apple-touch-icon.png`, `og.png`; генерируются `npm run icons`. `canonical`, `og:url`
+и `og:image` подставляются при сборке: из `SITE_URL`, иначе из `GITHUB_REPOSITORY`
+(`https://<owner>.github.io/<repo>`), локально — путь от `base`.
 
 ## 9. Ограничения
 
