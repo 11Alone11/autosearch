@@ -9,13 +9,11 @@ const GRAY = '#495057';
 const BORDER = '#dee2e6';
 const SURFACE = '#f8f9fa';
 
-const CAR = `<g fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M7.4 20.4 8.7 15.3A2.6 2.6 0 0 1 11.2 13.4h9.6a2.6 2.6 0 0 1 2.5 1.9l1.3 5.1" />
-    <path d="M6.6 20.5h18.8" />
-    <circle cx="11.2" cy="21.6" r="1.7" fill="${BLUE}" />
-    <circle cx="20.8" cy="21.6" r="1.7" fill="${BLUE}" />
-  </g>
-  <circle cx="16" cy="8.4" r="1.2" fill="#fff" />`;
+const CAR = `<g transform="translate(1.6 1.2) scale(1.2)" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
+  </g>`;
 
 const icon = (radius) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect width="32" height="32" rx="${radius}" fill="${BLUE}" />
