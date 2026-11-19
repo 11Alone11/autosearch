@@ -3,7 +3,8 @@ import type { Plugin } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 const [repoOwner, repoName] = (process.env.GITHUB_REPOSITORY ?? '').split('/');
-const base = process.env.BASE_PATH ?? (repoName ? `/${repoName}/` : '/');
+const isUserSite = repoName === `${repoOwner}.github.io`;
+const base = process.env.BASE_PATH ?? (repoName ? (isUserSite ? '/' : `/${repoName}/`) : '/');
 const siteUrl = (
   process.env.SITE_URL ??
   (repoOwner && repoName

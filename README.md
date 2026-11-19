@@ -220,9 +220,25 @@ E2E и визуальных регрессий в репозитории нет:
 
 `base` вычисляется из `GITHUB_REPOSITORY` (или `BASE_PATH`), локально — `/`.
 `SITE_URL` (необязательно) задаёт абсолютный адрес для canonical и OG; без него он
-выводится из `GITHUB_REPOSITORY`. После первого push включите GitHub Pages в настройках
-репозитория: источник — GitHub Actions.
-Приложение использует hash-роутер, поэтому дополнительная настройка `404.html` не нужна.
+выводится из `GITHUB_REPOSITORY`. Приложение использует hash-роутер, поэтому
+дополнительная настройка `404.html` не нужна.
+
+### Публикация с нуля
+
+1. Создайте на GitHub пустой публичный репозиторий — без README, `.gitignore` и лицензии.
+2. Добавьте remote и отправьте `main`:
+
+   ```bash
+   git remote add origin https://github.com/<owner>/<repo>.git
+   git push -u origin main
+   ```
+
+3. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+4. Actions → **Deploy to GitHub Pages**. Сайт появится на
+   `https://<owner>.github.io/<repo>/`; для репозитория `<owner>.github.io` — в корне.
+
+Если в репозитории уже есть коммиты, историю заменяет `git push --force -u origin main`.
+Pages для приватного репозитория доступен только на платном плане.
 
 ## Что не успел / что дальше
 
