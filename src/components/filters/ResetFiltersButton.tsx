@@ -12,13 +12,13 @@ interface ResetFiltersButtonProps {
 export function ResetFiltersButton({
   onClick,
   disabled,
-  variant = 'transparent',
+  variant = 'light',
   color = 'gray',
   label = 'Сбросить',
 }: ResetFiltersButtonProps) {
   return (
     <Button
-      variant={variant}
+      variant={disabled ? 'transparent' : variant}
       color={color}
       size="sm"
       leftSection={<IconRestore size={16} />}
