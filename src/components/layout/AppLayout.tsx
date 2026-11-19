@@ -13,6 +13,7 @@ import {
 import { IconBell, IconCar, IconList } from '@tabler/icons-react';
 import { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
+import { usePageMeta } from '../../hooks/usePageMeta';
 import { useNewLotsTotal } from '../../state/useNewLotsTotal';
 import { AddLotsButton } from '../lots/AddLotsButton';
 
@@ -30,6 +31,7 @@ function NavIcon({ to, size }: { to: string; size: number }) {
 export function AppLayout() {
   const newLotsTotal = useNewLotsTotal();
   const { pathname } = useLocation();
+  usePageMeta(pathname);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -62,26 +64,28 @@ export function AppLayout() {
               </Group>
             </UnstyledButton>
 
-            <Group gap={8} visibleFrom="md">
-              {NAV_ITEMS.map((item) => (
-                <Button
-                  key={item.to}
-                  component={Link}
-                  to={item.to}
-                  variant={pathname === item.to ? 'light' : 'subtle'}
-                  leftSection={<NavIcon to={item.to} size={20} />}
-                  rightSection={
-                    badge(item.to) ? (
-                      <Badge size="sm" variant="filled" radius="xl" px={4} miw={20} aria-live="polite">
-                        {badge(item.to)}
-                      </Badge>
-                    ) : undefined
-                  }
-                >
-                  {item.label}
-                </Button>
-              ))}
-            </Group>
+            <Box component="nav" aria-label="Основная навигация" visibleFrom="md">
+              <Group gap={8}>
+                {NAV_ITEMS.map((item) => (
+                  <Button
+                    key={item.to}
+                    component={Link}
+                    to={item.to}
+                    variant={pathname === item.to ? 'light' : 'subtle'}
+                    leftSection={<NavIcon to={item.to} size={20} />}
+                    rightSection={
+                      badge(item.to) ? (
+                        <Badge size="sm" variant="filled" radius="xl" px={4} miw={20} aria-live="polite">
+                          {badge(item.to)}
+                        </Badge>
+                      ) : undefined
+                    }
+                  >
+                    {item.label}
+                  </Button>
+                ))}
+              </Group>
+            </Box>
 
             <AddLotsButton />
           </Group>

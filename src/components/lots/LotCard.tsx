@@ -7,13 +7,26 @@ export function LotCard({ lot }: { lot: Lot }) {
   const title = `${lot.make} ${lot.model}`;
 
   return (
-    <Card className="app-card lot-card" padding={12} h="100%" data-testid="lot-card">
+    <Card
+      component="article"
+      aria-labelledby={`lot-${lot.id}-title`}
+      className="app-card lot-card"
+      padding={12}
+      h="100%"
+      data-testid="lot-card"
+    >
       <Card.Section pos="relative">
         <LotCardPhoto lot={lot} title={title} />
       </Card.Section>
 
       <Stack gap={4} mt={12} style={{ flex: 1 }}>
-        <Text className="t-title" lineClamp={1} title={title}>
+        <Text
+          component="h2"
+          id={`lot-${lot.id}-title`}
+          className="t-title"
+          lineClamp={1}
+          title={title}
+        >
           {title}
         </Text>
         <Text className="t-meta" c="dimmed" lineClamp={1}>
@@ -25,7 +38,13 @@ export function LotCard({ lot }: { lot: Lot }) {
         </Box>
 
         <Group justify="space-between" align="center" mt="auto" wrap="nowrap" gap={8}>
-          <Text className="t-meta" c="dimmed" lineClamp={1}>
+          <Text
+            component="time"
+            dateTime={lot.appearedAt}
+            className="t-meta"
+            c="dimmed"
+            lineClamp={1}
+          >
             {formatRelative(lot.appearedAt)}
           </Text>
           <Text className="t-meta" c="dimmed" lineClamp={1}>

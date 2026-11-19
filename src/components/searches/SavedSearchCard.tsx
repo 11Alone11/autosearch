@@ -12,14 +12,20 @@ interface SavedSearchCardProps {
 
 export function SavedSearchCard({ search, newCount, onOpen, onDelete }: SavedSearchCardProps) {
   return (
-    <Card padding="md" h="100%" className="app-card saved-search-card">
+    <Card
+      component="article"
+      aria-labelledby={`search-${search.id}-title`}
+      padding="md"
+      h="100%"
+      className="app-card saved-search-card"
+    >
       <Group justify="space-between" align="flex-start" wrap="nowrap" gap={8}>
         <Stack gap={4}>
-          <Text fw={600} lineClamp={2}>
+          <Text component="h2" id={`search-${search.id}-title`} fw={600} lineClamp={2}>
             {search.name}
           </Text>
           <Text size="xs" c="dimmed">
-            Сохранён {formatDate(search.createdAt)}
+            Сохранён <time dateTime={search.createdAt}>{formatDate(search.createdAt)}</time>
           </Text>
         </Stack>
         <ActionIcon

@@ -7,6 +7,7 @@ import {
   Paper,
   SimpleGrid,
   Text,
+  VisuallyHidden,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
@@ -143,11 +144,22 @@ export function LotsPage() {
 
   return (
     <>
+      <VisuallyHidden component="h1">Каталог автомобилей</VisuallyHidden>
+
       <Grid gap={24}>
         <Grid.Col span={{ base: 12, md: 4, lg: 3 }} visibleFrom="md">
-          <Paper p="md" pos="sticky" top={80} className="app-panel">
+          <Paper
+            component="section"
+            aria-labelledby="filters-heading"
+            p="md"
+            pos="sticky"
+            top={80}
+            className="app-panel"
+          >
             <Group justify="space-between" align="center" mb={16} wrap="nowrap">
-              <Text className="t-label">Фильтры</Text>
+              <Text component="h2" id="filters-heading" className="t-label">
+                Фильтры
+              </Text>
               <ResetFiltersButton
                 onClick={resetFilters}
                 disabled={!hasActiveFilters(criteria.filters)}
@@ -174,48 +186,54 @@ export function LotsPage() {
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 8, lg: 9 }}>
-          <ResultsToolbar
-            count={matched.length}
-            sort={criteria.sort}
-            activeFilterCount={activeFilterCount}
-            onSortChange={(sort: SortKey) =>
-              updateCriteria({ filters: criteria.filters, sort })
-            }
-            onOpenFilters={openDrawer}
-          />
+          <VisuallyHidden component="h2" id="results-heading">
+            Результаты поиска
+          </VisuallyHidden>
 
-          {matched.length === 0 ? (
-            <EmptyState
-              title="Ничего не нашлось"
-              description="Попробуйте расширить диапазон годов или поднять максимальную цену."
-              action={
-                <ResetFiltersButton
-                  onClick={resetFilters}
-                  variant="light"
-                  color="blue"
-                  label="Сбросить фильтры"
-                />
+          <section aria-labelledby="results-heading">
+            <ResultsToolbar
+              count={matched.length}
+              sort={criteria.sort}
+              activeFilterCount={activeFilterCount}
+              onSortChange={(sort: SortKey) =>
+                updateCriteria({ filters: criteria.filters, sort })
               }
+              onOpenFilters={openDrawer}
             />
-          ) : (
-            <>
-              <div className="app-fade-in">
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="md">
-                  {matched.slice(0, limit).map((lot) => (
-                    <LotCard key={lot.id} lot={lot} />
-                  ))}
-                </SimpleGrid>
-              </div>
 
-              {matched.length > limit && (
-                <Group justify="center" mt={24}>
-                  <Button variant="default" onClick={showMore} data-testid="show-more">
-                    Показать ещё {Math.min(PAGE_SIZE, matched.length - limit)}
-                  </Button>
-                </Group>
-              )}
-            </>
-          )}
+            {matched.length === 0 ? (
+              <EmptyState
+                title="Ничего не нашлось"
+                description="Попробуйте расширить диапазон годов или поднять максимальную цену."
+                action={
+                  <ResetFiltersButton
+                    onClick={resetFilters}
+                    variant="light"
+                    color="blue"
+                    label="Сбросить фильтры"
+                  />
+                }
+              />
+            ) : (
+              <>
+                <div className="app-fade-in">
+                  <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="md">
+                    {matched.slice(0, limit).map((lot) => (
+                      <LotCard key={lot.id} lot={lot} />
+                    ))}
+                  </SimpleGrid>
+                </div>
+
+                {matched.length > limit && (
+                  <Group justify="center" mt={24}>
+                    <Button variant="default" onClick={showMore} data-testid="show-more">
+                      Показать ещё {Math.min(PAGE_SIZE, matched.length - limit)}
+                    </Button>
+                  </Group>
+                )}
+              </>
+            )}
+          </section>
         </Grid.Col>
       </Grid>
 
@@ -243,7 +261,7 @@ export function LotsPage() {
         }}
       >
         <Group justify="space-between" align="center" mb={16} wrap="nowrap">
-          <Text fw={700} fz={18} lh="24px">
+          <Text component="h2" fw={700} fz={18} lh="24px">
             Фильтры
           </Text>
           <Group gap={4} wrap="nowrap">

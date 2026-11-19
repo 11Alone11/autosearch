@@ -6,6 +6,7 @@ import { EmptyState } from '../components/ui/EmptyState';
 export function NotFoundPage() {
   return (
     <EmptyState
+      headingLevel={1}
       icon={<IconSearch size={24} />}
       title="Страница не найдена"
       description="Возможно, ссылка устарела. Вернитесь к списку лотов — там всё на месте."

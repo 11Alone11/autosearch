@@ -194,7 +194,7 @@ Hash выбран, чтобы GitHub Pages не требовал копию `ind
 
 ## 7. Тесты
 
-`npm test` — 87 тестов на vitest + Testing Library. Покрываются `parseAbwDate`,
+`npm test` — 92 теста на vitest + Testing Library. Покрываются `parseAbwDate`,
 `splitMakeAndModel`, `parseMileage`, `filterLots`, `sortLots`, `countNewLots`,
 `normalizeFilters`, `generateLots`, `readJSON`/`writeJSON`,
 `saveSearch`/`deleteSearch`/`markSearchSeen`, форматирование и UI-сценарии:
@@ -211,6 +211,13 @@ GitHub Actions:
 
 - `ci.yml` — lint, typecheck, test, build на push и pull request;
 - `deploy.yml` — lint, typecheck, test, build и публикация `dist` на Pages.
+
+**SEO и метаданные.** `index.html` задаёт `lang="ru"`, description, robots, Open Graph
+и Twittercard. `src/lib/pageMeta.ts` — заголовок и описание для каталога, «Моих поисков»
+и 404; `usePageMeta` применяет их при смене маршрута. Разметка: `header`, `nav` и `main`
+из `AppShell`, `section` для фильтров и результатов, `article` для карточек, `h1`
+у каждой страницы. Иконки и OG-картинка — `public/favicon.svg`, `favicon-32.png`,
+`apple-touch-icon.png`, `og.png`; генерируются `npm run icons`.
 
 ## 9. Ограничения
 

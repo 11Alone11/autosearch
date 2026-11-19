@@ -77,7 +77,7 @@ export function SavedSearchesPage() {
     <Stack gap="md">
       <Group justify="space-between" align="flex-end" wrap="wrap" gap="sm">
         <Box>
-          <Title order={2} fz={{ base: 'h3', sm: 'h2' }}>
+          <Title order={1} fz={{ base: 'h3', sm: 'h2' }}>
             Мои поиски
           </Title>
           <Text className="t-body" c="dimmed" mt={4} aria-live="polite">
