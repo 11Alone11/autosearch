@@ -4,15 +4,21 @@ import { defineConfig } from 'vitest/config';
 
 const [repoOwner, repoName] = (process.env.GITHUB_REPOSITORY ?? '').split('/');
 const isUserSite = repoName === `${repoOwner}.github.io`;
-const base = process.env.BASE_PATH ?? (repoName ? (isUserSite ? '/' : `/${repoName}/`) : '/');
-const siteUrl = (
-  process.env.SITE_URL ??
-  (repoOwner && repoName
-    ? repoName === `${repoOwner}.github.io`
+const inferredSiteUrl =
+  repoOwner && repoName
+    ? isUserSite
       ? `https://${repoOwner}.github.io`
       : `https://${repoOwner}.github.io/${repoName}`
-    : '')
-).replace(/\/+$/, '');
+    : '';
+const envSiteUrl = (process.env.SITE_URL?.trim() ?? '').replace(/\/+$/, '');
+const siteUrl = envSiteUrl || inferredSiteUrl;
+const base = envSiteUrl
+  ? new URL(envSiteUrl).pathname.replace(/\/?$/, '/')
+  : repoName
+    ? isUserSite
+      ? '/'
+      : `/${repoName}/`
+    : '/';
 const pageUrl = siteUrl ? `${siteUrl}/` : base;
 const ogImage = siteUrl ? `${siteUrl}/og.png` : `${base}og.png`;
 

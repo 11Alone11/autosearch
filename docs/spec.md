@@ -204,8 +204,9 @@ E2E и визуальные регрессии — вне рамок.
 
 ## 8. Сборка и деплой
 
-`npm run build` = `tsc -b` + `vite build`. `base` вычисляется из `GITHUB_REPOSITORY`,
-локально — `/`; ассеты подключаются через `assetUrl()`.
+`npm run build` = `tsc -b` + `vite build`. `base` вычисляется из `GITHUB_REPOSITORY`
+(или из пути `SITE_URL`), локально — `/`; ассеты подключаются через `assetUrl()`.
+`SITE_URL` — необязательная переменная репозитория, workflow передаёт её в сборку.
 
 GitHub Actions:
 
