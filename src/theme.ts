@@ -12,7 +12,12 @@ export const theme = createTheme({
     Drawer: { defaultProps: { radius: 'lg' } },
     Notification: {
       defaultProps: {
-        closeButtonProps: { size: 36, 'aria-label': 'Закрыть уведомление' },
+        closeButtonProps: {
+          size: 40,
+          radius: 10,
+          iconSize: 18,
+          'aria-label': 'Закрыть уведомление',
+        },
       },
     },
   },

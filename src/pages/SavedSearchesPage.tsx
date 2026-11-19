@@ -46,18 +46,23 @@ export function SavedSearchesPage() {
 
     const notificationId = notifications.show({
       color: 'gray',
-      title: 'Поиск удалён',
       autoClose: 6000,
       withBorder: true,
       message: (
-        <Group justify="space-between" align="center" gap="md" wrap="nowrap" mt={4}>
-          <Text className="t-body" lineClamp={2} style={{ flex: 1 }}>
-            {search.name}
-          </Text>
+        <Group justify="space-between" align="center" gap="sm" wrap="nowrap">
+          <Stack gap={2} style={{ flex: 1 }}>
+            <Text className="t-body" fw={600}>
+              Поиск удалён
+            </Text>
+            <Text className="t-body" c="dimmed" lineClamp={2}>
+              {search.name}
+            </Text>
+          </Stack>
           <Button
             size="sm"
             variant="light"
             color="gray"
+            px={12}
             onClick={() => {
               restoreSearch(deleted.search, deleted.index);
               notifications.hide(notificationId);
